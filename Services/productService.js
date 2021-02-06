@@ -15,6 +15,7 @@ async function getAllProducts() {
 
 function getAllProductsKeys() {
     try {
+        resetTTL()
         return cachingLayer.keys();
     } catch (error) {
         throw error;
@@ -30,6 +31,7 @@ async function getProduct(productId) {
         else {
             console.log("Cache miss");
             product = randomstring.generate();
+            resetTTL()
             cachingLayer.set(productId, product);
         }
         return product;
@@ -41,6 +43,7 @@ async function getProduct(productId) {
 
 async function createProduct(productId, reqBody) {
     try {
+        resetTTL()
         cachingLayer.set(productId, reqBody.data);
         await productModel.updateOne({ _id: productId }, { name: reqBody.data }, { upsert: true });
         return cachingLayer.get(productId);
@@ -58,6 +61,7 @@ async function createProduct(productId, reqBody) {
 
 function deleteProductFromCache(productId) {
     try {
+        resetTTL()
         cachingLayer.del(productId)
         return 'record cleaned in cache';
     } catch (error) {
@@ -69,12 +73,16 @@ function deleteProductFromCache(productId) {
 function deleteAllProductFromCache() {
     try {
         const productsInCache = getAllProductsKeys();
+        resetTTL()
         cachingLayer.del(productsInCache)
         return cachingLayer.mget(productsInCache)
     } catch (error) {
         console.error(error);
         throw error
     }
+}
+function resetTTL() {
+    cachingLayer.set("ttlKey", process.env.MAX_ENTRIES)
 }
 module.exports = {
     createProduct,
