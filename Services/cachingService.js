@@ -1,15 +1,10 @@
 const productModel = require('../Models/product');
-const productService = require('./productService');
-const NodeCache = require("node-cache");
-const cachingLayer = new NodeCache({
-    stdTTL: process.env.TTL,
-    maxKeys: process.env.MAX_ENTRIES
-});
-
+const cachingLayer = require('../Helpers/cachingLayer')
+const productService = require('./productService')
 
 async function cacheDataFromDB() {
     try {
-        const products = await productService.getAllProducts()
+        const products = await productService.getAllProducts();
         if (products.length > 0) {
             const cacheSet = await prepareDataForCaching(products)
             await saveDataInCache(cacheSet)
@@ -51,6 +46,5 @@ async function saveDataInCache(data) {
 
 module.exports = {
     cacheDataFromDB,
-    cachingLayer,
 
 }
