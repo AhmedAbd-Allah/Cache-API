@@ -49,6 +49,7 @@ app.get('/products/:productId', productController.getProduct)
 app.get('/products', productController.getAllProducts)
 app.post('/product/:productId', productController.createProduct)
 app.delete('/product/cache/:productId', productController.deleteProductFromCache)
+app.delete('/products/cache/clear', productController.deleteAllProductFromCache)
 
 
 

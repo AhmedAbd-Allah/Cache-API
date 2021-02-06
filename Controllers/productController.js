@@ -12,7 +12,7 @@ async function getProduct(req, res) {
 
 async function getAllProducts(req, res) {
     try {
-        let product = await productService.getAllProductsKeys();
+        let product = productService.getAllProductsKeys();
         res.status(200).send(product)
     } catch (error) {
         console.error(error);
@@ -33,8 +33,18 @@ async function createProduct(req, res) {
 
 async function deleteProductFromCache(req, res) {
     try {
-        console.log(req.params.productId);
         let product = productService.deleteProductFromCache(req.params.productId);
+        res.status(200).send(product)
+    } catch (error) {
+        console.error(error);
+        res.send(error)
+    }
+}
+
+
+async function deleteAllProductFromCache(req, res) {
+    try {
+        let product = productService.deleteAllProductFromCache();
         res.status(200).send(product)
     } catch (error) {
         console.error(error);
@@ -47,7 +57,8 @@ module.exports = {
     getProduct,
     getAllProducts,
     createProduct,
-    deleteProductFromCache
+    deleteProductFromCache,
+    deleteAllProductFromCache
 }
 
 

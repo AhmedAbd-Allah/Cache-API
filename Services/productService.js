@@ -13,10 +13,9 @@ async function getAllProducts() {
 
 }
 
-async function getAllProductsKeys() {
+function getAllProductsKeys() {
     try {
         return cachingLayer.keys();
-        return keys;
     } catch (error) {
         throw error;
     }
@@ -61,10 +60,21 @@ function deleteProductFromCache(productId) {
     }
 }
 
+function deleteAllProductFromCache() {
+    try {
+        const productsInCache = getAllProductsKeys();
+        cachingLayer.del(productsInCache)
+        return cachingLayer.mget(productsInCache)
+    } catch (error) {
+        console.error(error);
+        throw error
+    }
+}
 module.exports = {
     createProduct,
     getAllProducts,
     getProduct,
     getAllProductsKeys,
-    deleteProductFromCache
+    deleteProductFromCache,
+    deleteAllProductFromCache
 };
