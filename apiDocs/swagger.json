@@ -1,0 +1,356 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "cache API Documentation",
+        "description": "This documentation describes each endpoint in the cache-API  application. The documentation shows each endpoint URL, request params, query string, request body and response",
+        "contact": {
+            "name": "Ahmed Abdallah",
+            "email": "ahmedabdallah.programming@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://127.0.0.1:3000"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Products",
+            "description": "Everything about cache endpoints"
+        }
+    ],
+    "paths": {
+        "/products": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all stored keys in the cache",
+                "operationId": "getAllKeys",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "All Products retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string",
+                                                "example": "55fdbc1e-ca6d-42f3-96ef-e82f2dc1eb10"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to retrieve all products"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "custom error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/products/{productId}": {
+            "get": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get the cached data for a given key",
+                "operationId": "getCachedDataPerKey",
+                "parameters": [
+                    {
+                        "name": "productId",
+                        "in": "path",
+                        "description": "key of the cached data",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product retrieved successfully"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "test-name"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to retrieve file"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "custom error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/product/{productId}": {
+            "post": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "creates/updates the data for a given key",
+                "operationId": "createData",
+                "requestBody": {
+                    "description": "Data provided by enduser to create/update the data for a given key",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "data": {
+                                        "type": "string",
+                                        "description": "name of product",
+                                        "example": "55fdbc1e-ca6d-42f3-96ef-e82f2dc1eb10"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product updated successfully"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "test-name"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to update product"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "custom error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/product/cache/{productId}": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "removes a given key from the cache",
+                "operationId": "deleteData",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Product deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "string",
+                                            "example": "record cleaned in cache"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to delete product"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "custom error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        },
+        "/products/cache/clear": {
+            "delete": {
+                "tags": [
+                    "Products"
+                ],
+                "summary": "removes all keys from the cache",
+                "operationId": "deleteAllData",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "success"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "All Products deleted successfully"
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Failed operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "example": "failure"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to delete all products"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "custom error message"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "x-codegen-request-body-name": "body"
+            }
+        }
+    }
+}

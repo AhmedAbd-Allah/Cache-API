@@ -7,7 +7,7 @@ async function getProduct(req, res) {
         responseBuilder.sendResponse('success', '', product, res, 'Product retrieved successfully')
     } catch (error) {
         console.error(error);
-        responseBuilder.sendResponse('failure', error, '', res, 'failed to retrieve product')
+        responseBuilder.sendResponse('failure', error, '', res, 'Failed to retrieve product')
     }
 }
 
@@ -17,7 +17,7 @@ async function getAllProducts(req, res) {
         responseBuilder.sendResponse('success', '', product, res, 'All Products retrieved successfully')
     } catch (error) {
         console.error(error);
-        responseBuilder.sendResponse('failure', error, '', res, 'failed to retrieve all products')
+        responseBuilder.sendResponse('failure', error, '', res, 'Failed to retrieve all products')
     }
 }
 
@@ -28,7 +28,7 @@ async function createProduct(req, res) {
         responseBuilder.sendResponse('success', '', product, res, 'Product updated successfully')
     } catch (error) {
         console.error(error);
-        responseBuilder.sendResponse('failure', error, '', res, 'failed to update product')
+        responseBuilder.sendResponse('failure', error, '', res, 'Failed to update product')
     }
 }
 
@@ -38,7 +38,7 @@ async function deleteProductFromCache(req, res) {
         responseBuilder.sendResponse('success', '', product, res, 'Product deleted successfully')
     } catch (error) {
         console.error(error);
-        responseBuilder.sendResponse('failure', error, '', res, 'failed to delete product')
+        responseBuilder.sendResponse('failure', error, '', res, 'Failed to delete product')
     }
 }
 
@@ -49,7 +49,7 @@ async function deleteAllProductFromCache(req, res) {
         responseBuilder.sendResponse('success', '', product, res, 'All Products deleted successfully')
     } catch (error) {
         console.error(error);
-        responseBuilder.sendResponse('failure', error, '', res, 'failed to delete all products')
+        responseBuilder.sendResponse('failure', error, '', res, 'Failed to delete all products')
     }
 }
 

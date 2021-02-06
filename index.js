@@ -6,6 +6,8 @@ const mongoSanitize = require('express-mongo-sanitize');
 const bodyParser = require('body-parser');
 const cachingService = require('./Services/cachingService');
 const productController = require('./Controllers/productController');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./apiDocs/swagger.json');
 
 // Start database connection
 (async () => {
@@ -43,6 +45,9 @@ app.use(function (req, res, next) {
 
 // get product data and save it in the cache
 cachingService.cacheDataFromDB()
+
+// Swagger Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 // app routes
 app.get('/products/:productId', productController.getProduct)
