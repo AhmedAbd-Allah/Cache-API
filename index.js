@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require('mongoose')
 const mongoSanitize = require('express-mongo-sanitize');
 const bodyParser = require('body-parser');
-
+const cachingService = require('./Services/cachingService');
 
 
 // Start database connection
@@ -41,12 +41,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-// app.get('/contacts', contactController.getAllContacts)
-// app.get('/contact/:contactId', contactController.getContact)
-// app.post('/contact', contactController.createContact)
-// app.delete('/contact/:contactId', contactController.deleteContact)
-// app.patch('/contact/:contactId', contactController.updateContact)
-
+// get product data and save it in the cache
+cachingService.cacheDataFromDB()
 
 // server up
 app.listen(process.env.SERVER_PORT, () => {
