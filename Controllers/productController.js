@@ -1,22 +1,23 @@
 const productService = require('../Services/productService')
+const responseBuilder = require('../Helpers/response/responseBuilder');
 
 async function getProduct(req, res) {
     try {
         let product = await productService.getProduct(req.params.productId);
-        res.status(200).send(product)
+        responseBuilder.sendResponse('success', '', product, res, 'Product retrieved successfully')
     } catch (error) {
         console.error(error);
-        res.send(error)
+        responseBuilder.sendResponse('failure', error, '', res, 'failed to retrieve product')
     }
 }
 
 async function getAllProducts(req, res) {
     try {
         let product = productService.getAllProductsKeys();
-        res.status(200).send(product)
+        responseBuilder.sendResponse('success', '', product, res, 'All Products retrieved successfully')
     } catch (error) {
         console.error(error);
-        res.send(error)
+        responseBuilder.sendResponse('failure', error, '', res, 'failed to retrieve all products')
     }
 }
 
@@ -24,20 +25,20 @@ async function createProduct(req, res) {
     try {
         console.log(req.body);
         let product = await productService.createProduct(req.params.productId, req.body);
-        res.status(200).send(product)
+        responseBuilder.sendResponse('success', '', product, res, 'Product updated successfully')
     } catch (error) {
         console.error(error);
-        res.send(error)
+        responseBuilder.sendResponse('failure', error, '', res, 'failed to update product')
     }
 }
 
 async function deleteProductFromCache(req, res) {
     try {
         let product = productService.deleteProductFromCache(req.params.productId);
-        res.status(200).send(product)
+        responseBuilder.sendResponse('success', '', product, res, 'Product deleted successfully')
     } catch (error) {
         console.error(error);
-        res.send(error)
+        responseBuilder.sendResponse('failure', error, '', res, 'failed to delete product')
     }
 }
 
@@ -45,10 +46,10 @@ async function deleteProductFromCache(req, res) {
 async function deleteAllProductFromCache(req, res) {
     try {
         let product = productService.deleteAllProductFromCache();
-        res.status(200).send(product)
+        responseBuilder.sendResponse('success', '', product, res, 'All Products deleted successfully')
     } catch (error) {
         console.error(error);
-        res.send(error)
+        responseBuilder.sendResponse('failure', error, '', res, 'failed to delete all products')
     }
 }
 

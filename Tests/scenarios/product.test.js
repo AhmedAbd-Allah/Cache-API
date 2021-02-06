@@ -20,9 +20,9 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.body).to.be.an('array')
-                    expect(response.body).to.have.lengthOf.below(Number(process.env.MAX_ENTRIES));
-                    cachingKeys = response.body
+                    expect(response.body.data).to.be.an('array')
+                    expect(response.body.data).to.have.lengthOf.below(Number(process.env.MAX_ENTRIES));
+                    cachingKeys = response.body.data
                     done();
                 }
             });
@@ -56,8 +56,8 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.text).to.be.a('string')
-                    expect(response.text).to.equal('test_data')
+                    expect(response.body.data).to.be.a('string')
+                    expect(response.body.data).to.equal('test_data')
                     done();
                 }
             });
@@ -72,8 +72,8 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.body).to.be.an('array')
-                    expect(response.body).to.have.lengthOf(cachingKeys.length + 1);
+                    expect(response.body.data).to.be.an('array')
+                    expect(response.body.data).to.have.lengthOf(cachingKeys.length + 1);
                     done();
                 }
             });
@@ -90,8 +90,8 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.text).to.be.a('string')
-                    expect(response.text).to.equal('record cleaned in cache')
+                    expect(response.body.data).to.be.a('string')
+                    expect(response.body.data).to.equal('record cleaned in cache')
                     done();
                 }
             });
@@ -106,9 +106,9 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.body).to.be.an('array')
-                    expect(response.body).to.have.lengthOf.below(Number(process.env.MAX_ENTRIES));
-                    expect(response.body).to.have.lengthOf(cachingKeys.length);
+                    expect(response.body.data).to.be.an('array')
+                    expect(response.body.data).to.have.lengthOf.below(Number(process.env.MAX_ENTRIES));
+                    expect(response.body.data).to.have.lengthOf(cachingKeys.length);
                     done();
                 }
             });
@@ -125,7 +125,7 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.body).to.be.empty;
+                    expect(response.body.data).to.be.empty;
                     done();
                 }
             });
@@ -140,8 +140,8 @@ describe("Test caching layer", function () {
                 if (error) {
                     done(error);
                 } else {
-                    expect(response.body).to.be.an('array')
-                    expect(response.body).to.have.lengthOf(0);
+                    expect(response.body.data).to.be.an('array')
+                    expect(response.body.data).to.have.lengthOf(0);
                     done();
                 }
             });
