@@ -40,8 +40,31 @@ async function getProduct(productId) {
     }
 }
 
+async function createProduct(productId, reqBody) {
+    try {
+        await productModel.updateOne({ _id: productId }, { name: reqBody.data }, { upsert: true });
+        cachingLayer.set(productId, reqBody.data);
+        return cachingLayer.get(productId);
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
+}
+
+function deleteProductFromCache(productId) {
+    try {
+        cachingLayer.del(productId)
+        return 'record cleaned in cache';
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
 module.exports = {
+    createProduct,
     getAllProducts,
     getProduct,
-    getAllProductsKeys
+    getAllProductsKeys,
+    deleteProductFromCache
 };

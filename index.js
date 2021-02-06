@@ -45,8 +45,11 @@ app.use(function (req, res, next) {
 cachingService.cacheDataFromDB()
 
 // app routes
-app.get('/product/:productId', productController.getProduct)
+app.get('/products/:productId', productController.getProduct)
 app.get('/products', productController.getAllProducts)
+app.post('/product/:productId', productController.createProduct)
+app.delete('/product/cache/:productId', productController.deleteProductFromCache)
+
 
 
 // server up

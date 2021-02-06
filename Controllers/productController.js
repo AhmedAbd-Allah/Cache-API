@@ -2,8 +2,8 @@ const productService = require('../Services/productService')
 
 async function getProduct(req, res) {
     try {
-        let contact = await productService.getProduct(req.params.productId);
-        res.status(200).send(contact)
+        let product = await productService.getProduct(req.params.productId);
+        res.status(200).send(product)
     } catch (error) {
         console.error(error);
         res.send(error)
@@ -12,8 +12,30 @@ async function getProduct(req, res) {
 
 async function getAllProducts(req, res) {
     try {
-        let contact = await productService.getAllProductsKeys();
-        res.status(200).send(contact)
+        let product = await productService.getAllProductsKeys();
+        res.status(200).send(product)
+    } catch (error) {
+        console.error(error);
+        res.send(error)
+    }
+}
+
+async function createProduct(req, res) {
+    try {
+        console.log(req.body);
+        let product = await productService.createProduct(req.params.productId, req.body);
+        res.status(200).send(product)
+    } catch (error) {
+        console.error(error);
+        res.send(error)
+    }
+}
+
+async function deleteProductFromCache(req, res) {
+    try {
+        console.log(req.params.productId);
+        let product = productService.deleteProductFromCache(req.params.productId);
+        res.status(200).send(product)
     } catch (error) {
         console.error(error);
         res.send(error)
@@ -23,7 +45,9 @@ async function getAllProducts(req, res) {
 
 module.exports = {
     getProduct,
-    getAllProducts
+    getAllProducts,
+    createProduct,
+    deleteProductFromCache
 }
 
 
