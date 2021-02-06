@@ -42,7 +42,7 @@ send a request to `/products/cache/clear` using HTTP method `DELETE` where produ
 ## Change Cache Properties
 1- The number of entries allowed in the cache is limited and you can change it by changing the value of the environment variable named as `MAX_ENTRIES` in the `.env` file
 
-2- Time To Live (TTL) for cached data is also limited and you can change it by changing the value of the `TTL` environment variable in the `.env` file
+2- Time To Live (TTL) for cached data is also limited and you can change it by changing the value of the `TTL` environment variable in the `.env` file (Value of TTL is set in seconds)
 
 3- MongoDB connection URI is set as environment variable and you can change it by changing the value of `MONGO_URI` in the `.env` file
 
