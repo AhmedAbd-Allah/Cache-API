@@ -50,13 +50,10 @@ send a request to `/products/cache/clear` using HTTP method `DELETE` where produ
 * run `npm test`
 
 ## If I have more time..
-1- I would create API documentaion using technologies like swagger  
 
-2- I would create a seperate test database (or in-memory database for test) other than the actual database
+1- I would create docker file for this app
 
-3- I would create docker file for this app
-
-4- I would deploy the app 
+2- I would deploy the app 
 
 ## Contact Details
 * Linkedin: https://www.linkedin.com/in/abdallah7/
