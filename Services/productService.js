@@ -25,13 +25,13 @@ function getAllProductsKeys() {
 async function getProduct(productId) {
     try {
         let product = cachingLayer.get(productId);
+        resetTTL()
         if (product) {
             console.log("Cache hit");
         }
         else {
             console.log("Cache miss");
             product = randomstring.generate();
-            resetTTL()
             cachingLayer.set(productId, product);
         }
         return product;
@@ -82,7 +82,8 @@ function deleteAllProductFromCache() {
     }
 }
 function resetTTL() {
-    cachingLayer.ttl(process.env.MAX_ENTRIES, process.env.MAX_ENTRIES)
+    //  cachingLayer.ttl(process.env.MAX_ENTRIES)
+    cachingLayer.ttl('existentKey', process.env.MAX_ENTRIES)
 }
 module.exports = {
     createProduct,

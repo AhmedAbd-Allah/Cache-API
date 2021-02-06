@@ -15,8 +15,10 @@ async function cacheDataFromDB() {
         //if the maximum number of allowed entried in cache is reached, then the first element that was set in the cache is deleted to allow a ned element to be set
         if (error.name == 'ECACHEFULL') {
             const products = productService.getAllProductsKeys()
-            cachingLayer.del(products[0])
-            //   cachingLayer.set(productId);
+            for (let i = 0; i < products.length; i++) {
+                if (products.length > process.env.MAX_ENTRIES)
+                    cachingLayer.del(products[i])
+            }
         }
         throw error
     }
