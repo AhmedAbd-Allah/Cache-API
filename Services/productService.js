@@ -13,6 +13,15 @@ async function getAllProducts() {
 
 }
 
+async function getAllProductsKeys() {
+    try {
+        return cachingLayer.keys();
+        return keys;
+    } catch (error) {
+        throw error;
+    }
+}
+
 async function getProduct(productId) {
     try {
         let product = cachingLayer.get(productId);
@@ -33,5 +42,6 @@ async function getProduct(productId) {
 
 module.exports = {
     getAllProducts,
-    getProduct
+    getProduct,
+    getAllProductsKeys
 };

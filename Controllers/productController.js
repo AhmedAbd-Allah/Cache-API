@@ -10,9 +10,20 @@ async function getProduct(req, res) {
     }
 }
 
+async function getAllProducts(req, res) {
+    try {
+        let contact = await productService.getAllProductsKeys();
+        res.status(200).send(contact)
+    } catch (error) {
+        console.error(error);
+        res.send(error)
+    }
+}
+
 
 module.exports = {
-    getProduct
+    getProduct,
+    getAllProducts
 }
 
 

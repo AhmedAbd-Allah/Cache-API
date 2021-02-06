@@ -46,6 +46,8 @@ cachingService.cacheDataFromDB()
 
 // app routes
 app.get('/product/:productId', productController.getProduct)
+app.get('/products', productController.getAllProducts)
+
 
 // server up
 app.listen(process.env.SERVER_PORT, () => {
