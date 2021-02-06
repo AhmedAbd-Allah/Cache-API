@@ -16,7 +16,6 @@ async function cacheDataFromDB() {
         if (error.name == 'ECACHEFULL') {
             const products = productService.getAllProductsKeys()
             cachingLayer.del(products[0])
-            cacheDataFromDB()
             //   cachingLayer.set(productId);
         }
         throw error

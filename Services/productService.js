@@ -82,7 +82,7 @@ function deleteAllProductFromCache() {
     }
 }
 function resetTTL() {
-    cachingLayer.set("ttlKey", process.env.MAX_ENTRIES)
+    cachingLayer.ttl(process.env.MAX_ENTRIES, process.env.MAX_ENTRIES)
 }
 module.exports = {
     createProduct,
