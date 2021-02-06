@@ -41,11 +41,17 @@ async function getProduct(productId) {
 
 async function createProduct(productId, reqBody) {
     try {
-        await productModel.updateOne({ _id: productId }, { name: reqBody.data }, { upsert: true });
         cachingLayer.set(productId, reqBody.data);
+        await productModel.updateOne({ _id: productId }, { name: reqBody.data }, { upsert: true });
         return cachingLayer.get(productId);
     } catch (error) {
-        console.error(error);
+        // if the maximum number of allowed entried in cache is reached, then the first element that was set in the cache is deleted to allow a ned element to be set
+
+        if (error.name == 'ECACHEFULL') {
+            const products = getAllProductsKeys()
+            cachingLayer.del(products[0])
+            cachingLayer.set(productId, reqBody.data);
+        }
         throw error;
     }
 }
